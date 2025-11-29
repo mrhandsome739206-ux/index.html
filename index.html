@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For My Love — Sorry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #1b1f3a;
+      --bg2: #ff6584;
+      --accent: #fff6f9;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Poppins',sans-serif}
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(255,120,150,0.12), transparent),
+                  linear-gradient(180deg,var(--bg1),#2d1a3a 60%);
+      color:var(--accent);
+      overflow:hidden;
+    }
+
+    /* Center card */
+    .stage{
+      position:relative;
+      width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+    .card{
+      width:980px;max-width:95%;background:linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius:20px;padding:28px;backdrop-filter: blur(6px);box-shadow:0 12px 50px rgba(0,0,0,0.6);
+      position:relative;overflow:hidden;
+    }
+
+    /* Top header */
+    .top{display:flex;align-items:center;gap:20px}
+    .logo{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#ff9aa2,#ff6b9a);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;color:white;box-shadow:0 8px 30px rgba(255,105,140,0.18)}
+    .title{flex:1}
+    h1{margin:0;font-size:34px;letter-spacing:0.2px}
+    .subtitle{margin:4px 0 0;font-weight:300;opacity:0.95}
+
+    /* Slideshow */
+    .slideshow{margin-top:18px;border-radius:14px;overflow:hidden;height:360px;position:relative}
+    .slides{display:flex;height:100%;transition:transform 900ms cubic-bezier(.2,.9,.2,1)}
+    .slide{min-width:100%;height:100%;position:relative;background:#000;display:flex;align-items:center;justify-content:center}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .slide .caption{position:absolute;left:20px;bottom:22px;background:linear-gradient(90deg, rgba(0,0,0,0.5), rgba(0,0,0,0.2));padding:10px 14px;border-radius:12px}
+
+    /* Message panel */
+    .message{display:flex;gap:24px;align-items:flex-start;margin-top:18px}
+    .msg-left{flex:1}
+    .msg-right{width:300px}
+    .heart-big{font-size:64px;animation:beat 1.2s infinite}
+    @keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.14)}100%{transform:scale(1)}}
+
+    .textbox{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:18px;border-radius:12px}
+    .textbox p{margin:8px 0;line-height:1.55;font-size:18px}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;margin-top:14px}
+    .btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;cursor:pointer;font-weight:600}
+
+    /* Floating hearts and rose petals */
+    .overlay{position:absolute;inset:0;pointer-events:none}
+    .petal, .float-heart{position:absolute;will-change:transform,opacity}
+
+    /* footer */
+    .footer{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .credits{opacity:0.9;font-size:14px}
+
+    /* small responsive tweaks */
+    @media(max-width:880px){
+      .message{flex-direction:column}
+      .msg-right{width:100%}
+      .slideshow{height:220px}
+    }
+
+    /* soft glow */
+    .glow{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.26}
+    .g1{width:420px;height:420px;left:-80px;top:-120px;background:radial-gradient(circle at 30% 30%, #ff6b9a, transparent)}
+    .g2{width:360px;height:360px;right:-80px;bottom:-100px;background:radial-gradient(circle at 70% 70%, #ffd1e6, transparent)}
+
+    /* typed effect */
+    .typed{font-weight:600;font-size:18px}
+
+    /* music control icon */
+    .music-toggle{display:inline-flex;align-items:center;gap:8px}
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card" id="card">
+      <div class="overlay" id="overlay"></div>
+      <div class="glow g1"></div>
+      <div class="glow g2"></div>
+
+      <div class="top">
+        <div class="logo">❤</div>
+        <div class="title">
+          <h1 id="mainTitle">I really sorry so much </h1>
+          <div class="subtitle typed" id="typedLine">meri jaan bhooot saaara i pyar you baby hamesa tumse bhot pyar krta rhuga jaan meri jaan i love you bhoot saara meri jaan ❣️💕💞.</div>
+        </div>
+        <div style="text-align:right">
+          <div class="music-toggle">
+            <button class="btn" id="playBtn">Play Music ▶</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slideshow" id="slideshow">
+        <div class="slides" id="slides">
+          <!-- Replace src with your photos or let them stay as placeholders -->
+          <div class="slide"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="photo1"><div class="caption">meri jaaan hum dono ek dusre ki jaan hai </div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=2" alt="photo2"><div class="caption">Hasi aur saath — hamara favorite pal</div></div>
+          <div class="slide"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&s=3" alt="photo3"><div class="caption">forever end ever i love you my love 😘</div></div>
+        </div>
+      </div>
+
+      <div class="message">
+        <div class="msg-left">
+          <div class="textbox">
+            <p id="para1">me tumse bhot pyar krta hu jaanu pls mujeh maaf krdo baby i really sooo much love you my darling .</p>
+            <p id="para2">meri jaaan tum meri jaan ho meri sab kcuh ho meri baby pls meri jaan maaf krdo infint time love you .</p>
+            <div class="controls">
+              <button class="btn" id="nextSlide">Next Photo</button>
+              <button class="btn" id="prevSlide">Prev Photo</button>
+              <button class="btn" id="showLetter">Show Romantic Letter</button>
+            </div>
+          </div>
+        </div>
+        <div class="msg-right">
+          <div style="background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:18px;border-radius:12px;text-align:center">
+            <div class="heart-big">❤</div>
+            <div style="margin-top:8px;font-weight:600"> tum meri jaan ho baby</div>
+            <div style="margin-top:12px"> <button class="btn" id="confessBtn">mujhe maaf krdo,baby?</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="credits">Made with ❤️ just for you</div>
+        <div style="opacity:0.9;font-size:14px">Tip: Click the 'Play Music' button and let the hearts float ✨</div>
+      </div>
+
+      <!-- Hidden modal for letter -->
+      <div id="modal" style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.72));display:none;align-items:center;justify-content:center;padding:30px">
+        <div style="background:linear-gradient(180deg,#ffffff0f,#ffffff06);padding:26px;border-radius:14px;max-width:760px;width:100%;color:var(--accent);box-shadow:0 20px 60px rgba(0,0,0,0.8)">
+          <h2 style="margin-top:0">Meri Sachchi Baat</h2>
+          <p style="line-height:1.7;font-size:18px">Merii pyaari <span id="wifeName">jukebox</span>,<br><br>
+            i miss you meri baby bhot saara i miss you meri darling maaf krdo mere bacho ki maa bhoot saara miss you baby i love you forever end ever. <br><br>
+            Tumhara hamesha,<br>
+            <strong id="yourName">Tumhara</strong>
+          </p>
+          <div style="text-align:right;margin-top:10px"><button class="btn" id="closeModal">Close</button></div>
+        </div>
+      </div>
+
+      <!-- background audio (placeholder) -->
+      <audio id="bgMusic" src="tujh-bin-tone-43983-44013.mp3" autoplay loop playsinline muted></audio>
+
+    </div>
+  </div>
+
+  <script>
+    // --- Basic slideshow ---
+    const slides = document.getElementById('slides');
+    const total = slides.children.length;
+    let idx = 0;
+    function show(i){
+      idx = (i + total) % total;
+      slides.style.transform = `translateX(-${idx*100}%)`;
+    }
+    document.getElementById('nextSlide').addEventListener('click', ()=> show(idx+1));
+    document.getElementById('prevSlide').addEventListener('click', ()=> show(idx-1));
+
+    // auto slide every 5s
+    let slideInterval = setInterval(()=> show(idx+1), 5000);
+    // pause on hover
+    const slideArea = document.getElementById('slideshow');
+    slideArea.addEventListener('mouseenter', ()=> clearInterval(slideInterval));
+    slideArea.addEventListener('mouseleave', ()=> slideInterval = setInterval(()=> show(idx+1), 5000));
+
+    // --- Modal letter ---
+    const modal = document.getElementById('modal');
+    document.getElementById('showLetter').addEventListener('click', ()=> modal.style.display='flex');
+    document.getElementById('closeModal').addEventListener('click', ()=> modal.style.display='none');
+
+    // --- Music and hearts/petals animation ---
+    const audio = document.getElementById('bgAudio');
+    const playBtn = document.getElementById('playBtn');
+    let playing = false;
+    playBtn.addEventListener('click', ()=>{
+      if(!playing){ audio.play(); playBtn.textContent='Pause Music ⏸'; playing=true; startFloating(); }
+      else{ audio.pause(); playBtn.textContent='Play Music ▶'; playing=false; }
+    });
+
+    // create floating hearts & petals
+    const overlay = document.getElementById('overlay');
+    let floatInterval;
+    function createFloat(){
+      const el = document.createElement('div');
+      const kind = Math.random() > 0.45 ? 'petal' : 'float-heart';
+      el.className = kind;
+      const size = Math.random()*28 + 12;
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+      const left = Math.random()*100;
+      el.style.left = left + '%';
+      const rotate = Math.random()*360;
+      el.style.transform = `translateY(0) rotate(${rotate}deg)`;
+      el.style.opacity = 0.95 - Math.random()*0.6;
+
+      if(kind==='float-heart'){
+        el.innerHTML = '❤';
+        el.style.fontSize = (size - 4) + 'px';
+        el.style.lineHeight = (size) + 'px';
+        el.style.textAlign = 'center';
+        el.style.pointerEvents = 'none';
+      } else {
+        // petal using simple circle with gradient
+        el.style.borderRadius = '50%';
+        el.style.background = 'radial-gradient(circle at 30% 30%, #ffd1e6, #ff6b9a)';
+        el.style.opacity = 0.95;
+      }
+
+      overlay.appendChild(el);
+      // animate
+      const duration = 5000 + Math.random()*6000;
+      const endX = (Math.random() - 0.5) * 120; // drift
+      el.animate([
+        { transform: `translate(${0}px, 0px) rotate(${rotate}deg)`, opacity: el.style.opacity },
+        { transform: `translate(${endX}px, -${600 + Math.random()*200}px) rotate(${rotate+60}deg)`, opacity: 0.02 }
+      ],{duration,iterations:1,easing:'linear'}).onfinish = ()=> el.remove();
+    }
+    function startFloating(){
+      if(floatInterval) return;
+      floatInterval = setInterval(createFloat, 420);
+    }
+
+    // stop floating when audio paused
+    audio.addEventListener('pause', ()=> { clearInterval(floatInterval); floatInterval=undefined; });
+
+    // small typed effect
+    const typedLine = document.getElementById('typedLine');
+    const phrases = [
+      'Tum mere liye sabse khaas ho.,
+      'Main tumse bohot pyaar karta hoon.',
+  a.'
+    ];
+    let tIdx=0, ch=0, forward=true;
+    setInterval(()=>{
+      let text = phrases[tIdx];
+      if(forward){ ch++; if(ch>text.length){ forward=false; setTimeout(()=>{},800);} }
+      else { ch--; if(ch===0){ forward=true; tIdx=(tIdx+1)%phrases.length;} }
+      typedLine.textContent = text.slice(0,ch);
+    },80);
+
+    // confess button — small playful animation
+    document.getElementById('confessBtn').addEventListener('click', ()=>{
+      alert('Tumhe maaf karne ka order: Dil se maaf! ❤️');
+    });
+
+    // personalize names if you want to change quickly
+    // (These can be replaced in the HTML or programmatically)
+    document.getElementById('wifeName').textContent = 'Jaan';
+    document.getElementById('yourName').textContent = 'Tumhara Pyar';
+
+    // make sure slides stay visible on load
+    show(0);
+
+    // Accessibility: let keyboard navigate slides
+    document.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowRight') show(idx+1);
+      if(e.key==='ArrowLeft') show(idx-1);
+      if(e.key==='Escape') modal.style.display='none';
+    });
+  </script>
+<script>
+// Try to play automatically
+const music = document.getElementById('bgMusic');
+
+// Unmute & play when page loads
+window.addEventListener('load', () => {
+    music.muted = true;
+    music.play().then(() => {
+        setTimeout(() => {
+            music.muted = false;
+        }, 500);
+    }).catch(() => {});
+});
+
+// Also unmute & play on first user interaction
+const enableSound = () => {
+    music.muted = false;
+    music.play();
+    window.removeEventListener('click', enableSound);
+    window.removeEventListener('touchstart', enableSound);
+};
+
+window.addEventListener('click', enableSound);
+window.addEventListener('touchstart', enableSound);
+</script>
+</body>
+  </html>
